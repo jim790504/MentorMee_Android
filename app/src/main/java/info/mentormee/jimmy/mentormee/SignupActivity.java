@@ -4,13 +4,15 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
 
-import org.json.JSONObject;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -22,6 +24,15 @@ public class SignupActivity extends Activity {
 
     //private EditText usernameField, passwordField, confirmPasswordField;
     private EditText usernameField, passwordField, confirmPasswordField;
+    public static final String PREFS_NAME = "MyApp_Settings";
+
+    public static void setDefaults(String key, String value, Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +86,7 @@ public class SignupActivity extends Activity {
             pDialog.setCancelable(true);
             pDialog.show();
         }
+
 
         @Override
         protected String doInBackground (String...arg0){
@@ -143,6 +155,10 @@ public class SignupActivity extends Activity {
                     postID = jObj2.getString("ID");
 
                     String createNewAccount = "userID=" + postID;
+
+                    SharedPreferences PREFS = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+
+                    setDefaults("ID", postID, getBaseContext());
 
                     String link3 = "http://mentormee.info/dbTestConnect/createNewAccount.php";
 

@@ -13,14 +13,19 @@ tools:context=".MainActivity" >
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:onClick="mentor"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
     android:text="@string/Mentor" />
 
 <Button
     android:id="@+id/button_mentee"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
+    android:layout_below="@id/button_mentor"
     android:onClick="mentee"
+    android:layout_marginTop="30dp"
     android:text="@string/Mentee" />
 
 
